@@ -1,0 +1,14 @@
+{
+  "schema": {
+    "request": {
+      "url" : "https://api.graphcms.com/simple/v1/cja1cdc1025zq0178qyx22jh4",
+      "method" : "POST",
+      "postIntrospectionQuery" : true,
+      "options" : {
+        "headers": {
+          "Content-Type" : "application/json"
+        }
+      }
+    }
+  }
+}
