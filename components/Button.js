@@ -6,6 +6,10 @@ export const Button = ({ href, children }) => (
     </Link>
     <style jsx>
       {`
+        span {
+          display: inline-block;
+        }
+
         .link :global(a) {
           padding: 19px 40px;
           border: 1px solid #444;
@@ -17,6 +21,7 @@ export const Button = ({ href, children }) => (
           background: #fff;
           text-decoration: none;
           cursor: pointer;
+          display: inline-block;
         }
 
         .link :global(a:hover) {

@@ -9,18 +9,27 @@ const Index = ({ camps, info, pages, monitors }) => (
   <Layout>
     <Carousel />
     <Content>
-      {info && <Page page={info} />}
+      {info && (
+        <a name="maresia">
+          <Page page={info} />
+        </a>
+      )}
 
-      <h3 className="section-title">Campamentos</h3>
+      <a name="campamentos"/>
+      <h3 name="campamentos" className="section-title">
+        Campamentos
+      </h3>
       <div className="camps">
         {camps.map(camp => <Camp key={camp.id} camp={camp} />)}
       </div>
 
+      <a name="servicios"/>
       <h3 className="section-title">Servicios</h3>
       <div className="services">
         {pages.map(page => <Page key={page.id} page={page} />)}
       </div>
 
+      <a name="monitores"/>
       <h3 className="section-title">Monitores</h3>
       <div className="monitors">
         {monitors.map(monitor => (

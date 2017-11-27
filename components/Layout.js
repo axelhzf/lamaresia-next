@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { global } from './globalStyles';
 
 export const Layout = ({ children }) => (
@@ -28,12 +29,11 @@ export const Layout = ({ children }) => (
           </div>
         </div>
         <ul className="menu">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Acerca de</a></li>
-          <li><a href="#">Trips</a></li>
-          <li><a href="#">Prices</a></li>
-          <li><a href="#">Events</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#maresia">¿Qué es la maresía?</a></li>
+          <li><a href="/#campamentos">Campamentos</a></li>
+          <li><a href="/#servicios">Servicios</a></li>
+          <li><a href="/#monitores">Monitores</a></li>
         </ul>
       </Content>
     </div>
