@@ -29,6 +29,7 @@ export default class Page extends React.Component {
     return (
       <Layout>
         <Content>
+
           <h1>{page.title}</h1>
           <div dangerouslySetInnerHTML={{__html: page.body }} />
           {page.images.map((image) => (

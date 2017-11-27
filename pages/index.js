@@ -1,8 +1,9 @@
-import Link from 'next/link';
 import { fetchQuery, gql } from '../lib/fetchQuery';
 import { Content, Layout } from '../components/Layout';
 import { AspectRatio } from '../components/AspectRatio';
 import { BackgroundImage } from '../components/BackgroundImage';
+import { Button } from '../components/Button';
+import { Hero } from '../components/Hero';
 
 const Index = ({ camps, info, pages, monitors }) => (
   <Layout>
@@ -70,17 +71,7 @@ const Index = ({ camps, info, pages, monitors }) => (
 
 const Carousel = () => (
   <div className="carousel">
-    <AspectRatio ratio={16 / 5}>
-      <BackgroundImage
-        className="photo"
-        src="http://campers.crunchpress.com/wp-content/uploads/2016/09/1.png"
-      />
-    </AspectRatio>
-    <style jsx>{`
-      .carousel :global(.photo) {
-        height: 100%;
-      }
-    `}</style>
+    <Hero url="http://campers.crunchpress.com/wp-content/uploads/2016/09/1.png" />
   </div>
 );
 
@@ -160,8 +151,11 @@ const Camp = ({ camp }) => (
     />
     <div className="camp-content">
       <div className="camp-title">{camp.title}</div>
-      <div className="camp-excerpt">
-        {camp.excerpt} {camp.price}
+      <div className="camp-excerpt">{camp.excerpt}</div>
+      <div>
+        <Button href={{ pathname: '/camps', query: { id: camp.id } }}>
+          Ver más
+        </Button>
       </div>
     </div>
     <style jsx>{`
@@ -231,59 +225,6 @@ const Monitor = ({ monitor }) => (
       }
     `}</style>
   </div>
-);
-
-const Button = ({ href, children }) => (
-  <span className="link">
-    <Link href={href}>
-      {children}
-    </Link>
-    <style jsx>
-      {`
-        .link :global(a) {
-          padding: 19px 40px;
-          border: 1px solid #444;
-          font: 700 14px/14px 'Montserrat', sans-serif;
-          color: #222;
-          text-transform: uppercase;
-          position: relative;
-          z-index: 11;
-          background: #fff;
-          text-decoration: none;
-          cursor: pointer;
-        }
-
-        .link :global(a:hover) {
-          border: 1px solid rgba(0, 0, 0, 0);
-          background: #9bc83c;
-          text-decoration: none;
-          color: #fff;
-        }
-
-        .link :global(a:before) {
-          content: '';
-          position: absolute;
-          left: -2px;
-          top: -2px;
-          border-top: 4px solid #444;
-          border-left: 4px solid #444;
-          width: 23px;
-          height: 23px;
-        }
-
-        .link :global(a:after) {
-          content: '';
-          position: absolute;
-          right: -2px;
-          bottom: -2px;
-          border-bottom: 4px solid #444;
-          border-right: 4px solid #444;
-          width: 23px;
-          height: 23px;
-        }
-      `}
-    </style>
-  </span>
 );
 
 Index.getInitialProps = async () => {
