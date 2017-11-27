@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { fetchQuery, gql } from '../lib/fetchQuery';
 import { Content, Layout } from '../components/Layout';
 import { AspectRatio } from '../components/AspectRatio';
@@ -37,15 +38,15 @@ const Index = ({ camps, info, pages, monitors }) => (
       }
 
       .section-title:before {
-      content: '';
-      background: url(/static/heading-line.png) no-repeat center bottom;
-      width: 100%;
-      height: 16px;
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -28px;
-      margin: auto;
+        content: '';
+        background: url(/static/heading-line.png) no-repeat center bottom;
+        width: 100%;
+        height: 16px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -28px;
+        margin: auto;
       }
 
       .camps {
@@ -89,7 +90,9 @@ const Page = ({ page }) => (
     <div className="page-content">
       <div className="left">
         <div className="excerpt">{page.excerpt}</div>
-        <Button>Ver más</Button>
+        <Button href={{ pathname: '/page', query: { id: page.key } }}>
+          Ver más
+        </Button>
       </div>
       <div className="right">
         <div className="page-images">
@@ -230,13 +233,14 @@ const Monitor = ({ monitor }) => (
   </div>
 );
 
-const Button = ({ href, children, onClick }) => (
-  <a href={href} onClick={onClick}>
-    {children}
+const Button = ({ href, children }) => (
+  <span className="link">
+    <Link href={href}>
+      {children}
+    </Link>
     <style jsx>
       {`
-        a {
-          float: left;
+        .link :global(a) {
           padding: 19px 40px;
           border: 1px solid #444;
           font: 700 14px/14px 'Montserrat', sans-serif;
@@ -249,14 +253,14 @@ const Button = ({ href, children, onClick }) => (
           cursor: pointer;
         }
 
-        a:hover {
+        .link :global(a:hover) {
           border: 1px solid rgba(0, 0, 0, 0);
           background: #9bc83c;
           text-decoration: none;
           color: #fff;
         }
 
-        a:before {
+        .link :global(a:before) {
           content: '';
           position: absolute;
           left: -2px;
@@ -267,7 +271,7 @@ const Button = ({ href, children, onClick }) => (
           height: 23px;
         }
 
-        a:after {
+        .link :global(a:after) {
           content: '';
           position: absolute;
           right: -2px;
@@ -279,7 +283,7 @@ const Button = ({ href, children, onClick }) => (
         }
       `}
     </style>
-  </a>
+  </span>
 );
 
 Index.getInitialProps = async () => {
@@ -298,12 +302,14 @@ Index.getInitialProps = async () => {
       info: Page(key: "la-maresia") {
         title
         excerpt
+        key
         images {
           url
         }
       }
       pages: allPages(filter: { key_not: "la-maresia" }) {
         id
+        key
         title
         excerpt
         images {
