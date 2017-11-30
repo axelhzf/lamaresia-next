@@ -28,6 +28,7 @@ export const Testimonials = ({ testimonials }) => (
           background-size: cover;
           background-position: center center;
           color: #fff;
+          margin-top: 60px;
         }
 
         .overlay {

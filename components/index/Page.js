@@ -1,4 +1,6 @@
-import { Button } from '../Button'
+import { Button } from '../Button';
+import { AspectRatio } from '../AspectRatio';
+import { BackgroundImage } from '../BackgroundImage';
 
 export const Page = ({ page }) => (
   <div className="page">
@@ -12,11 +14,13 @@ export const Page = ({ page }) => (
       </div>
       <div className="right">
         <div className="page-images">
-          {page.images
-            .slice(0, 2)
-            .map(image => (
-              <img className="page-image" src={image.url} key={image.url}/>
-            ))}
+          {page.images.slice(0, 2).map(image => (
+            <div className="page-image">
+              <AspectRatio ratio={16 / 9} key={image.url}>
+                <BackgroundImage style={{ height: '100%' }} src={image.url} />
+              </AspectRatio>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -60,7 +64,7 @@ export const Page = ({ page }) => (
         align-items: flex-start;
       }
 
-      .page-image {
+      .page-images :global(.page-image) {
         width: 300px;
         margin-left: 7px;
       }
