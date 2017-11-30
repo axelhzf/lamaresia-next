@@ -1,317 +1,88 @@
 import React from 'react';
 import { fetchQuery, gql } from '../lib/fetchQuery';
 import { Content, Layout } from '../components/Layout';
-import { AspectRatio } from '../components/AspectRatio';
-import { BackgroundImage } from '../components/BackgroundImage';
-import { Button } from '../components/Button';
 import { Hero } from '../components/Hero';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
 import { CampsSection} from '../components/index/CampsSection';
-
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-const Index = ({ camps, info, pages, monitors, testimonials }) => (
-  <Layout>
-    <Carousel/>
-    <Content>
-      {info && (
-        <div>
-          <a name="maresia"/>
-          <Page page={info}/>
-        </div>
-      )}
-
-      <CampsSection camps={camps} />
-
-      <a name="servicios"/>
-      <h3 className="section-title">Servicios</h3>
-      <div className="services">
-        {pages.map(page => <Page key={page.id} page={page}/>)}
-      </div>
-    </Content>
-    <Testimonials testimonials={testimonials}/>
-    <Content>
-      <a name="monitores"/>
-      <h3 className="section-title">Monitores</h3>
-      <div className="monitors">
-        {monitors.map(monitor => (
-          <Monitor key={monitor.id} monitor={monitor}/>
-        ))}
-      </div>
-    </Content>
-    <style jsx>{`
-      .section-title {
-        font: 700 36px/36px 'Montserrat', sans-serif;
-        color: #222;
-        margin: 60px 0;
-        text-transform: uppercase;
-        position: relative;
-        text-align: center;
-      }
-
-      .section-title:before {
-        content: '';
-        background: url(/static/heading-line.png) no-repeat center bottom;
-        width: 100%;
-        height: 16px;
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -28px;
-        margin: auto;
-      }
-
-      .services {
-      }
-
-      .monitors {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 10px;
-        width: 100%;
-      }
-    `}</style>
-  </Layout>
-);
-
-const Carousel = () => (
-  <div className="carousel">
-    <Hero url="static/leaf.jpg" title="Campamento la Maresia"/>
-  </div>
-);
-
-const Page = ({ page }) => (
-  <div className="page">
-    <div className="page-title">{page.title}</div>
-    <div className="page-content">
-      <div className="left">
-        <div className="excerpt">{page.excerpt}</div>
-        <Button href={{ pathname: '/page', query: { id: page.key } }}>
-          Ver más
-        </Button>
-      </div>
-      <div className="right">
-        <div className="page-images">
-          {page.images
-            .slice(0, 2)
-            .map(image => (
-              <img className="page-image" src={image.url} key={image.url}/>
-            ))}
-        </div>
-      </div>
-    </div>
-    <style jsx>{`
-      .page-title {
-        font: 700 36px/36px 'Montserrat', sans-serif;
-        color: #222;
-        margin: 40px 0;
-        position: relative;
-      }
-
-      .page-title:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -16px;
-        width: 35px;
-        height: 2px;
-        background: #ccc;
-      }
-
-      .page-content {
-        display: flex;
-        width: 100%;
-      }
-
-      .left {
-        flex: 1;
-      }
-
-      .excerpt {
-        font-size: 14px;
-        margin-bottom: 14px;
-      }
-
-      .right {
-      }
-
-      .page-images {
-        display: flex;
-        align-items: flex-start;
-      }
-
-      .page-image {
-        width: 300px;
-        margin-left: 7px;
-      }
-    `}</style>
-  </div>
-);
+import { LaMaresiaSection } from '../components/index/LaMaresiaSection';
+import { ServicesSection } from '../components/index/ServicesSection';
+import { MonitorsSection } from '../components/index/MonitorsSection'
+import { Testimonials} from '../components/index/Testimonials';
 
 
+export default class Index extends React.Component {
 
-const Monitor = ({ monitor }) => (
-  <div className="monitor">
-    <AspectRatio ratio={1}>
-      <BackgroundImage className="photo" src={monitor.photo.url}/>
-    </AspectRatio>
-    <h3>{monitor.name}</h3>
-    <p>{monitor.bio}</p>
-    <style jsx>{`
-      .monitor :global(.photo) {
-        border-radius: 100%;
-        width: 100%;
-        height: 100%;
-      }
-
-      h3 {
-        font: 400 20px;
-        color: #222;
-        clear: both;
-        overflow: hidden;
-        margin: 20px 0 18px 0;
-        position: relative;
-        text-align: center;
-      }
-
-      p {
-        text-align: center;
-        display: block;
-        color: #777;
-      }
-    `}</style>
-  </div>
-);
-
-const Testimonials = ({ testimonials }) => (
-  <div className="testimonials">
-    <div className="overlay">
-      <Content>
-        <h3 className="section-title">Opiniones</h3>
-        <AutoPlaySwipeableViews interval={5000}>
-          {testimonials.map(testimonial => (
-            <div className="testimonial" key={testimonial.id}>
-              <div className="left">
-                <BackgroundImage className="photo" src={testimonial.image.url}/>
-                <div className="name">{testimonial.name}</div>
-              </div>
-              <div className="content">{testimonial.content}</div>
-            </div>
-          ))}
-        </AutoPlaySwipeableViews>
-      </Content>
-    </div>
-    <style jsx>{`
-        .testimonials {
-          background-image: url('/static/testimonial-bg2.jpg');
-          background-size: cover;
-          background-position: center center;
-          color: #fff;
+  static async getInitialProps() {
+    const response = await fetchQuery(gql`
+      query {
+        camps: allCamps {
+          id
+          title
+          excerpt
+          price
+          mainImage {
+            url
+          }
+          body
+          campFeatures {
+            id
+            name
+            icon
+          }
         }
-
-        .overlay {
-          background-color: rgba(0, 0, 0, 0.4);
-          padding: 60px 0;
+        info: Page(key: "la-maresia") {
+          title
+          excerpt
+          key
+          images {
+            url
+          }
         }
-
-        .section-title {
-          font: 700 36px/36px 'Montserrat', sans-serif;
-          text-transform: uppercase;
-          position: relative;
-          text-align: center;
-          margin-bottom: 60px;
+        pages: allPages(filter: { key_not: "la-maresia" }) {
+          id
+          key
+          title
+          excerpt
+          images {
+            url
+          }
         }
-
-        .section-title:before {
-          content: '';
-          background: url(/static/heading-line.png) no-repeat center bottom;
-          width: 100%;
-          height: 16px;
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: -28px;
-          margin: auto;
-        }
-
-        .testimonial {
-          display: flex;
-          align-items: center;
-        }
-
-        .testimonial :global(.photo) {
-            width: 100px;
-            height: 100px;
-            border-radius: 100%;
-            background-color: #fff;
-        }
-
-        .left {
-          width: 150px;
-        }
-
-        .content {
-          flex: 1;
-        }
-      `}</style>
-  </div>
-);
-
-Index.getInitialProps = async () => {
-  const response = await fetchQuery(gql`
-    query {
-      camps: allCamps {
-        id
-        title
-        excerpt
-        price
-        mainImage {
-          url
-        }
-        body
-        campFeatures {
+        monitors: allMonitors(orderBy: name_ASC) {
           id
           name
-          icon
+          bio
+          photo {
+            url
+          }
+        }
+        testimonials: allTestimonials {
+          id
+          name
+          content
+          image {
+            url
+          }
         }
       }
-      info: Page(key: "la-maresia") {
-        title
-        excerpt
-        key
-        images {
-          url
-        }
-      }
-      pages: allPages(filter: { key_not: "la-maresia" }) {
-        id
-        key
-        title
-        excerpt
-        images {
-          url
-        }
-      }
-      monitors: allMonitors(orderBy: name_ASC) {
-        id
-        name
-        bio
-        photo {
-          url
-        }
-      }
-      testimonials: allTestimonials {
-        id
-        name
-        content
-        image {
-          url
-        }
-      }
-    }
-  `);
-  return response;
-};
+    `);
+    return response;
+  };
 
-export default Index;
+  render() {
+    const { camps, info, pages, monitors, testimonials } = this.props;
+    return (
+      <Layout>
+        <Hero url="static/leaf.jpg" title="Campamento la Maresia"/>
+        <Content>
+          <LaMaresiaSection info={info}/>
+          <CampsSection camps={camps} />
+          <ServicesSection pages={pages} />
+        </Content>
+        <Testimonials testimonials={testimonials}/>
+        <Content>
+          <MonitorsSection monitors={monitors} />
+        </Content>
+      </Layout>
+    )
+  }
+
+}
