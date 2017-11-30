@@ -1,3 +1,4 @@
+import React from 'react';
 import { fetchQuery, gql } from '../lib/fetchQuery';
 import { Content, Layout } from '../components/Layout';
 import { AspectRatio } from '../components/AspectRatio';
@@ -6,41 +7,36 @@ import { Button } from '../components/Button';
 import { Hero } from '../components/Hero';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import { CampsSection} from '../components/index/CampsSection';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const Index = ({ camps, info, pages, monitors, testimonials }) => (
   <Layout>
-    <Carousel />
+    <Carousel/>
     <Content>
       {info && (
         <div>
-          <a name="maresia" />
-          <Page page={info} />
+          <a name="maresia"/>
+          <Page page={info}/>
         </div>
       )}
 
-      <a name="campamentos" />
-      <h3 name="campamentos" className="section-title">
-        Campamentos
-      </h3>
-      <div className="camps">
-        {camps.map(camp => <Camp key={camp.id} camp={camp} />)}
-      </div>
+      <CampsSection camps={camps} />
 
-      <a name="servicios" />
+      <a name="servicios"/>
       <h3 className="section-title">Servicios</h3>
       <div className="services">
-        {pages.map(page => <Page key={page.id} page={page} />)}
+        {pages.map(page => <Page key={page.id} page={page}/>)}
       </div>
     </Content>
-    <Testimonials testimonials={testimonials} />
+    <Testimonials testimonials={testimonials}/>
     <Content>
-      <a name="monitores" />
+      <a name="monitores"/>
       <h3 className="section-title">Monitores</h3>
       <div className="monitors">
         {monitors.map(monitor => (
-          <Monitor key={monitor.id} monitor={monitor} />
+          <Monitor key={monitor.id} monitor={monitor}/>
         ))}
       </div>
     </Content>
@@ -66,12 +62,6 @@ const Index = ({ camps, info, pages, monitors, testimonials }) => (
         margin: auto;
       }
 
-      .camps {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-gap: 10px;
-      }
-
       .services {
       }
 
@@ -87,7 +77,7 @@ const Index = ({ camps, info, pages, monitors, testimonials }) => (
 
 const Carousel = () => (
   <div className="carousel">
-    <Hero url="static/leaf.jpg" title="Campamento la Maresia" />
+    <Hero url="static/leaf.jpg" title="Campamento la Maresia"/>
   </div>
 );
 
@@ -106,7 +96,7 @@ const Page = ({ page }) => (
           {page.images
             .slice(0, 2)
             .map(image => (
-              <img className="page-image" src={image.url} key={image.url} />
+              <img className="page-image" src={image.url} key={image.url}/>
             ))}
         </div>
       </div>
@@ -159,61 +149,12 @@ const Page = ({ page }) => (
   </div>
 );
 
-const Camp = ({ camp }) => (
-  <div className="camp" key={camp.id}>
-    <div
-      className="camp-image"
-      style={{ backgroundImage: `url(${camp.mainImage.url})` }}
-    />
-    <div className="camp-content">
-      <div className="camp-title">{camp.title}</div>
-      <div className="camp-excerpt">{camp.excerpt}</div>
-      <div>
-        <Button href={{ pathname: '/camps', query: { id: camp.id } }}>
-          Ver más
-        </Button>
-      </div>
-    </div>
-    <style jsx>{`
-      .camp {
-      }
 
-      .camp-image {
-        display: block;
-        height: 0;
-        padding-top: 56.25%;
-        background-size: cover;
-      }
-
-      .camp-content {
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 32px 20px;
-        width: 90%;
-        position: relative;
-        top: -20px;
-        left: 10px;
-      }
-
-      .camp-title {
-        font: 400 20px 'Montserrat', sans-serif;
-        color: #222;
-        margin-bottom: 18px;
-      }
-
-      .camp-excerpt {
-        font: 400 14px/24px 'Open Sans', sans-serif;
-        color: #777;
-        margin-bottom: 15px;
-      }
-    `}</style>
-  </div>
-);
 
 const Monitor = ({ monitor }) => (
   <div className="monitor">
     <AspectRatio ratio={1}>
-      <BackgroundImage className="photo" src={monitor.photo.url} />
+      <BackgroundImage className="photo" src={monitor.photo.url}/>
     </AspectRatio>
     <h3>{monitor.name}</h3>
     <p>{monitor.bio}</p>
@@ -249,15 +190,15 @@ const Testimonials = ({ testimonials }) => (
       <Content>
         <h3 className="section-title">Opiniones</h3>
         <AutoPlaySwipeableViews interval={5000}>
-        {testimonials.map(testimonial => (
-          <div className="testimonial" key={testimonial.id}>
-            <div className="left">
-              <BackgroundImage className="photo" src={testimonial.image.url} />
-              <div className="name">{testimonial.name}</div>
+          {testimonials.map(testimonial => (
+            <div className="testimonial" key={testimonial.id}>
+              <div className="left">
+                <BackgroundImage className="photo" src={testimonial.image.url}/>
+                <div className="name">{testimonial.name}</div>
+              </div>
+              <div className="content">{testimonial.content}</div>
             </div>
-            <div className="content">{testimonial.content}</div>
-          </div>
-        ))}
+          ))}
         </AutoPlaySwipeableViews>
       </Content>
     </div>
@@ -329,6 +270,11 @@ Index.getInitialProps = async () => {
           url
         }
         body
+        campFeatures {
+          id
+          name
+          icon
+        }
       }
       info: Page(key: "la-maresia") {
         title
