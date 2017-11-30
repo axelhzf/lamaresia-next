@@ -4,8 +4,12 @@ import { AspectRatio } from '../components/AspectRatio';
 import { BackgroundImage } from '../components/BackgroundImage';
 import { Button } from '../components/Button';
 import { Hero } from '../components/Hero';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
 
-const Index = ({ camps, info, pages, monitors }) => (
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+
+const Index = ({ camps, info, pages, monitors, testimonials }) => (
   <Layout>
     <Carousel />
     <Content>
@@ -29,7 +33,9 @@ const Index = ({ camps, info, pages, monitors }) => (
       <div className="services">
         {pages.map(page => <Page key={page.id} page={page} />)}
       </div>
-
+    </Content>
+    <Testimonials testimonials={testimonials} />
+    <Content>
       <a name="monitores" />
       <h3 className="section-title">Monitores</h3>
       <div className="monitors">
@@ -81,7 +87,7 @@ const Index = ({ camps, info, pages, monitors }) => (
 
 const Carousel = () => (
   <div className="carousel">
-    <Hero url="static/leaf.jpg" title="Campamento la Maresia"/>
+    <Hero url="static/leaf.jpg" title="Campamento la Maresia" />
   </div>
 );
 
@@ -237,6 +243,80 @@ const Monitor = ({ monitor }) => (
   </div>
 );
 
+const Testimonials = ({ testimonials }) => (
+  <div className="testimonials">
+    <div className="overlay">
+      <Content>
+        <h3 className="section-title">Opiniones</h3>
+        <AutoPlaySwipeableViews interval={5000}>
+        {testimonials.map(testimonial => (
+          <div className="testimonial" key={testimonial.id}>
+            <div className="left">
+              <BackgroundImage className="photo" src={testimonial.image.url} />
+              <div className="name">{testimonial.name}</div>
+            </div>
+            <div className="content">{testimonial.content}</div>
+          </div>
+        ))}
+        </AutoPlaySwipeableViews>
+      </Content>
+    </div>
+    <style jsx>{`
+        .testimonials {
+          background-image: url('/static/testimonial-bg2.jpg');
+          background-size: cover;
+          background-position: center center;
+          color: #fff;
+        }
+
+        .overlay {
+          background-color: rgba(0, 0, 0, 0.4);
+          padding: 60px 0;
+        }
+
+        .section-title {
+          font: 700 36px/36px 'Montserrat', sans-serif;
+          text-transform: uppercase;
+          position: relative;
+          text-align: center;
+          margin-bottom: 60px;
+        }
+
+        .section-title:before {
+          content: '';
+          background: url(/static/heading-line.png) no-repeat center bottom;
+          width: 100%;
+          height: 16px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -28px;
+          margin: auto;
+        }
+
+        .testimonial {
+          display: flex;
+          align-items: center;
+        }
+
+        .testimonial :global(.photo) {
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            background-color: #fff;
+        }
+
+        .left {
+          width: 150px;
+        }
+
+        .content {
+          flex: 1;
+        }
+      `}</style>
+  </div>
+);
+
 Index.getInitialProps = async () => {
   const response = await fetchQuery(gql`
     query {
@@ -272,6 +352,14 @@ Index.getInitialProps = async () => {
         name
         bio
         photo {
+          url
+        }
+      }
+      testimonials: allTestimonials {
+        id
+        name
+        content
+        image {
           url
         }
       }
