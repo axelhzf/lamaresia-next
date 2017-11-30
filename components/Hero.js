@@ -3,7 +3,7 @@ import { BackgroundImage } from '../components/BackgroundImage';
 
 export const Hero = ({ url, title, subtitle }) => (
   <div className="carousel">
-    <AspectRatio ratio={16 / 5}>
+    <AspectRatio ratio={16 / 3}>
       <BackgroundImage
         className="photo"
         src={url}

@@ -81,7 +81,7 @@ const Index = ({ camps, info, pages, monitors }) => (
 
 const Carousel = () => (
   <div className="carousel">
-    <Hero url="http://campers.crunchpress.com/wp-content/uploads/2016/09/1.png" />
+    <Hero url="static/leaf.jpg" title="Campamento la Maresia"/>
   </div>
 );
 
