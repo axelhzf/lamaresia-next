@@ -81,6 +81,9 @@ export const Layout = ({ children }) => (
           <li>
             <a href="/#monitores">Monitores</a>
           </li>
+          <li>
+            <Link href={{ pathname: 'multimedia' }}>Multimedia</Link>
+          </li>
         </ul>
       </Content>
     </div>
@@ -160,7 +163,7 @@ export const Layout = ({ children }) => (
           margin: 0;
         }
 
-        .menu a {
+        .menu :global(a) {
           display: block;
           padding: 7px 0;
           text-decoration: none;
@@ -171,11 +174,11 @@ export const Layout = ({ children }) => (
           margin: 3px 0;
         }
 
-        .menu li:last-child a {
+        .menu li:last-child :global(a) {
           border-right: none;
         }
 
-        .menu a:hover {
+        .menu :global(a:hover) {
           color: #91c135;
         }
 
