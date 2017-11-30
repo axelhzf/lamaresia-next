@@ -10,12 +10,13 @@ const Index = ({ camps, info, pages, monitors }) => (
     <Carousel />
     <Content>
       {info && (
-        <a name="maresia">
+        <div>
+          <a name="maresia" />
           <Page page={info} />
-        </a>
+        </div>
       )}
 
-      <a name="campamentos"/>
+      <a name="campamentos" />
       <h3 name="campamentos" className="section-title">
         Campamentos
       </h3>
@@ -23,13 +24,13 @@ const Index = ({ camps, info, pages, monitors }) => (
         {camps.map(camp => <Camp key={camp.id} camp={camp} />)}
       </div>
 
-      <a name="servicios"/>
+      <a name="servicios" />
       <h3 className="section-title">Servicios</h3>
       <div className="services">
         {pages.map(page => <Page key={page.id} page={page} />)}
       </div>
 
-      <a name="monitores"/>
+      <a name="monitores" />
       <h3 className="section-title">Monitores</h3>
       <div className="monitors">
         {monitors.map(monitor => (
