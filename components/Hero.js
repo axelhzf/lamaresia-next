@@ -2,22 +2,22 @@ import { AspectRatio } from '../components/AspectRatio';
 import { BackgroundImage } from '../components/BackgroundImage';
 
 export const Hero = ({ url, title, subtitle }) => (
-  <div className="carousel">
-    <AspectRatio ratio={16 / 3}>
-      <BackgroundImage
-        className="photo"
-        src={url}
-      >
-        {(title || subtitle) && (
-          <div className="overlay">
-            {title && <div className="title">{title}</div>}
-            {subtitle && <div className="subtitle">{subtitle}</div>}
-          </div>
-        )}
-      </BackgroundImage>
-    </AspectRatio>
+  <div className="hero">
+    <BackgroundImage className="photo" src={url}>
+      {(title || subtitle) && (
+        <div className="overlay">
+          {title && <div className="title">{title}</div>}
+          {subtitle && <div className="subtitle">{subtitle}</div>}
+        </div>
+      )}
+    </BackgroundImage>
     <style jsx>{`
-      .carousel :global(.photo) {
+      .hero {
+        height: 250px;
+        width: 100%;
+      }
+
+      .hero :global(.photo) {
         height: 100%;
       }
 
@@ -33,7 +33,7 @@ export const Hero = ({ url, title, subtitle }) => (
 
       .title {
         color: #fff;
-        font-size: 70px;
+        font-size: 300%;
         line-height: 1;
         font-weight: bold;
         text-align: center;

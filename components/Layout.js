@@ -65,26 +65,7 @@ export const Layout = ({ children }) => (
             </div>
           </div>
         </div>
-        <ul className="menu">
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/#maresia">¿Qué es la maresía?</a>
-          </li>
-          <li>
-            <a href="/#campamentos">Campamentos</a>
-          </li>
-          <li>
-            <a href="/#servicios">Servicios</a>
-          </li>
-          <li>
-            <a href="/#monitores">Monitores</a>
-          </li>
-          <li>
-            <Link href={{ pathname: 'multimedia' }}>Multimedia</Link>
-          </li>
-        </ul>
+        <Menu />
       </Content>
     </div>
     <div>{children}</div>
@@ -142,44 +123,6 @@ export const Layout = ({ children }) => (
         .info-content .number a {
           text-decoration: none;
           color: inherit;
-        }
-
-        .menu {
-          list-style: none;
-          display: flex;
-          margin: 0;
-          padding: 0;
-          border: 1px solid #ccc;
-          margin: 0 20px;
-          position: relative;
-          top: 24px;
-          z-index: 1;
-          background-color: #fff;
-        }
-
-        .menu li {
-          flex: 1;
-          text-align: center;
-          margin: 0;
-        }
-
-        .menu :global(a) {
-          display: block;
-          padding: 7px 0;
-          text-decoration: none;
-          color: #333;
-          text-transform: uppercase;
-          font-size: 14px;
-          border-right: 1px solid #ccc;
-          margin: 3px 0;
-        }
-
-        .menu li:last-child :global(a) {
-          border-right: none;
-        }
-
-        .menu :global(a:hover) {
-          color: #91c135;
         }
 
         .social {
@@ -242,3 +185,66 @@ export const Content = ({ children }) => (
     `}</style>
   </div>
 );
+
+const Menu = ()=> (
+  <ul className="menu">
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/#maresia">La Maresía</a>
+    </li>
+    <li>
+      <a href="/#campamentos">Campamentos</a>
+    </li>
+    <li>
+      <a href="/#servicios">Servicios</a>
+    </li>
+    <li>
+      <a href="/#monitores">Monitores</a>
+    </li>
+    <li>
+      <Link href={{ pathname: 'multimedia' }}>Multimedia</Link>
+    </li>
+    <style jsx>{`
+        .menu {
+          list-style: none;
+          display: flex;
+          margin: 0;
+          padding: 0;
+          border: 1px solid #ccc;
+          margin: 0 20px;
+          position: relative;
+          top: 24px;
+          z-index: 1;
+          background-color: #fff;
+          flex-wrap: wrap;
+        }
+
+        .menu li {
+          flex: 1;
+          text-align: center;
+          margin: 0;
+        }
+
+        .menu :global(a) {
+          display: block;
+          padding: 7px;
+          text-decoration: none;
+          color: #333;
+          text-transform: uppercase;
+          font-size: 14px;
+          border-right: 1px solid #ccc;
+          margin: 3px 0;
+        }
+
+        .menu li:last-child :global(a) {
+          border-right: none;
+        }
+
+        .menu :global(a:hover) {
+          color: #91c135;
+        }
+    `}</style>
+  </ul>
+)

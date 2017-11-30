@@ -8,9 +8,11 @@ export const Page = ({ page }) => (
     <div className="page-content">
       <div className="left">
         <div className="excerpt">{page.excerpt}</div>
-        <Button href={{ pathname: '/page', query: { id: page.key } }}>
-          Ver más
-        </Button>
+        <div className="button">
+          <Button href={{ pathname: '/page', query: { id: page.key } }}>
+            Ver más
+          </Button>
+        </div>
       </div>
       <div className="right">
         <div className="page-images">
@@ -67,6 +69,29 @@ export const Page = ({ page }) => (
       .page-images :global(.page-image) {
         width: 300px;
         margin-left: 7px;
+      }
+
+      @media (max-width : 769px) {
+        .page-content {
+          flex-direction: column;
+        }
+
+        .left {
+          order: 2;
+        }
+
+        .right {
+          order: 1;
+          margin-bottom: 20px;
+        }
+
+        .page-images {
+          justify-content: center;
+        }
+
+        .button {
+          text-align: right;
+        }
       }
     `}</style>
   </div>

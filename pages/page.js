@@ -59,6 +59,13 @@ export default class Page extends React.Component {
           height: 200px;
           margin: 5px;
         }
+
+        @media (max-width : 769px) {
+          .gallery :global(.image) {
+            width: calc(50% - 10px);
+          }
+        }
+
         `}</style>
       </Layout>
     );

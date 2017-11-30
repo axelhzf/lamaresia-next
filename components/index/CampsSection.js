@@ -17,6 +17,12 @@ export class CampsSection extends React.Component {
             grid-template-columns: 1fr 1fr;
             grid-gap: 10px;
           }
+
+          @media (max-width : 768px) {
+            .camps {
+              grid-template-columns: 1fr;
+            }
+          }
         `}</style>
       </div>
     );

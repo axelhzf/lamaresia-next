@@ -1,5 +1,6 @@
 import Link from 'next/link';
-export const Button = ({ href, children }) => (
+
+export const Button = ({ href, children, className }) => (
   <span className="link">
     <Link href={href}>
       {children}
