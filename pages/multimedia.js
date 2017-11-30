@@ -46,6 +46,10 @@ export default class Multimedia extends React.Component {
             margin-top: 40px;
             text-align: center;
           }
+
+          .videos :global(iframe) {
+            max-width: 100%;
+          }
         `}</style>
       </Layout>
     );

@@ -71,7 +71,7 @@ export const Page = ({ page }) => (
         margin-left: 7px;
       }
 
-      @media (max-width : 769px) {
+      @media (max-width : 1024px) {
         .page-content {
           flex-direction: column;
         }

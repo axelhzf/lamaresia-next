@@ -38,26 +38,6 @@ export const Testimonials = ({ testimonials }) => (
           padding: 60px 0;
         }
 
-        .section-title {
-          font: 700 36px/36px 'Montserrat', sans-serif;
-          text-transform: uppercase;
-          position: relative;
-          text-align: center;
-          margin-bottom: 60px;
-        }
-
-        .section-title:before {
-          content: '';
-          background: url(/static/heading-line.png) no-repeat center bottom;
-          width: 100%;
-          height: 16px;
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: -28px;
-          margin: auto;
-        }
-
         .testimonial {
           display: flex;
           align-items: center;
@@ -72,10 +52,29 @@ export const Testimonials = ({ testimonials }) => (
 
         .left {
           width: 150px;
+          text-align: center;
         }
 
         .content {
           flex: 1;
+        }
+
+        @media (max-width : 375px) {
+          .testimonial {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+          }
+
+          .content {
+            text-align: center;
+          }
         }
       `}</style>
   </div>
