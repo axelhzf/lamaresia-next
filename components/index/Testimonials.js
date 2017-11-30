@@ -1,14 +1,16 @@
+import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { BackgroundImage } from '../BackgroundImage'
 import { Content } from '../Layout'
+import { SectionTitle } from './SectionTitle'
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 export const Testimonials = ({ testimonials }) => (
   <div className="testimonials">
     <div className="overlay">
       <Content>
-        <h3 className="section-title">Opiniones</h3>
+        <SectionTitle title="Opiniones" invert />
         <AutoPlaySwipeableViews interval={5000}>
           {testimonials.map(testimonial => (
             <div className="testimonial" key={testimonial.id}>

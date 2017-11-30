@@ -11,6 +11,7 @@ export class SectionTitle extends React.Component {
           .title {
             font: 700 36px/36px 'Montserrat', sans-serif;
             color: #222;
+            color: ${ this.props.invert ? '#fff' : '#222' };
             margin: 60px 0;
             text-transform: uppercase;
             position: relative;
