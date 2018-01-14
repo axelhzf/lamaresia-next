@@ -1,3 +1,4 @@
+import slugify from '../../lib/slugify'
 import React from 'react';
 import { SectionTitle } from './SectionTitle';
 import { Button } from '../Button';
@@ -43,7 +44,7 @@ class Camp extends React.Component {
             <div className="title">{camp.title}</div>
             <div className="excerpt">{camp.excerpt}</div>
             <div>
-              <Button href={{ pathname: '/camps', query: { id: camp.id } }}>
+              <Button as={`/camps/${slugify(camp.title)}`}href={{ pathname: '/camps', query: { id: camp.id } }}>
                 Ver más
               </Button>
             </div>

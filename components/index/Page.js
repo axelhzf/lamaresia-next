@@ -1,3 +1,4 @@
+import slugify from '../../lib/slugify'
 import { Button } from '../Button';
 import { AspectRatio } from '../AspectRatio';
 import { BackgroundImage } from '../BackgroundImage';
@@ -9,7 +10,7 @@ export const Page = ({ page }) => (
       <div className="left">
         <div className="excerpt">{page.excerpt}</div>
         <div className="button">
-          <Button href={{ pathname: '/page', query: { id: page.key } }}>
+          <Button as={`/pages/${slugify(page.key)}`} href={{ pathname: '/page', query: { id: page.key } }}>
             Ver más
           </Button>
         </div>

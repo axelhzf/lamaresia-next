@@ -1,11 +1,14 @@
 {
+  "license": "MIT",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT",
+    "static": "next build && next export",
     "heroku-postbuild": "next build"
   },
   "dependencies": {
+    "@std/esm": "^0.19.2",
     "graphql": "^0.11.7",
     "graphql-tag": "^2.5.0",
     "isomorphic-unfetch": "^2.0.0",
@@ -13,6 +16,8 @@
     "prettier": "^1.8.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "react-swipeable-views": "^0.12.12"
-  }
+    "react-swipeable-views": "^0.12.12",
+    "slugify": "^1.2.9"
+  },
+  "@std/esm": "cjs"
 }
