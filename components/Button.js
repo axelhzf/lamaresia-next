@@ -1,10 +1,8 @@
-import Link from 'next/link';
+import { Link } from './Link';
 
 export const Button = ({ as, href, children, className }) => (
   <span className="link">
-    <a href={as}>
-      {children}
-    </a>
+    <Link href={href} as={as}>{children}</Link>
     <style jsx>
       {`
         span {

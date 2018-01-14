@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import { Link } from './Link';
 import { global } from './globalStyles';
 
 export const Layout = ({ children }) => (
@@ -216,24 +216,24 @@ const Social = () => (
 const Menu = () => (
   <ul className="menu">
     <li>
-      <a href="/">Home</a>
+      <Link href="/">Home</Link>
     </li>
     <li>
-      <a href="/#maresia">La Maresía</a>
+      <Link href="/#maresia">La Maresía</Link>
     </li>
     <li>
-      <a href="/#campamentos">Campamentos</a>
+      <Link href="/#campamentos">Campamentos</Link>
     </li>
     <li>
-      <a href="/#servicios">Servicios</a>
+      <Link href="/#servicios">Servicios</Link>
     </li>
     <li>
-      <a href="/#monitores">Monitores</a>
+      <Link href="/#monitores">Monitores</Link>
     </li>
     <li>
-      <a href="/multimedia">
+      <Link href="/multimedia">
         Multimedia
-      </a>
+      </Link>
     </li>
     <style jsx>{`
       .menu {

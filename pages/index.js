@@ -29,7 +29,7 @@ export default class Index extends React.Component {
             icon
           }
         }
-        info: Page(key: "la-maresia") {
+        topPages: allPages(filter: { location: Top }, orderBy: id_ASC) {
           title
           excerpt
           key
@@ -37,7 +37,7 @@ export default class Index extends React.Component {
             url
           }
         }
-        pages: allPages(filter: { key_not: "la-maresia" }) {
+        bottomPages: allPages(filter: { location: Bottom }, orderBy: id_ASC) {
           id
           key
           title
@@ -68,14 +68,14 @@ export default class Index extends React.Component {
   };
 
   render() {
-    const { camps, info, pages, monitors, testimonials } = this.props;
+    const { camps, topPages, bottomPages, monitors, testimonials } = this.props;
     return (
       <Layout>
         <Hero url="static/leaf.jpg" title="Campamento la Maresia"/>
         <Content>
-          <LaMaresiaSection info={info}/>
+          <LaMaresiaSection topPages={topPages}/>
           <CampsSection camps={camps} />
-          <ServicesSection pages={pages} />
+          <ServicesSection pages={bottomPages} />
         </Content>
         <Testimonials testimonials={testimonials}/>
         <Content>

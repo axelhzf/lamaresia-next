@@ -3,12 +3,14 @@ import { Page } from './Page';
 
 export class LaMaresiaSection extends React.Component {
   render() {
-    const { info } = this.props;
-    if (!info) return null;
+    const { topPages } = this.props;
+    if (!topPages) return null;
     return (
       <div>
         <a name="maresia" />
-        <Page page={info} />
+        {topPages.map((page) =>
+          <Page page={page} key={page.id} />)
+        }
       </div>
     );
   }

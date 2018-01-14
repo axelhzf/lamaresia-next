@@ -4,11 +4,12 @@
     "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT",
-    "static": "next build && next export",
+    "static": "STATIC=true next build && next export",
     "heroku-postbuild": "next build"
   },
   "dependencies": {
     "@std/esm": "^0.19.2",
+    "babel-plugin-transform-inline-environment-variables": "^0.2.0",
     "graphql": "^0.11.7",
     "graphql-tag": "^2.5.0",
     "isomorphic-unfetch": "^2.0.0",
