@@ -18,7 +18,7 @@ export const Page = ({ page }) => (
       <div className="right">
         <div className="page-images">
           {page.images.slice(0, 2).map(image => (
-            <div className="page-image">
+            <div className="page-image" key={image.url}>
               <AspectRatio ratio={16 / 9} key={image.url}>
                 <BackgroundImage style={{ height: '100%' }} src={image.url} />
               </AspectRatio>

@@ -34,8 +34,8 @@ export default class Multimedia extends React.Component {
                   width="560"
                   height="315"
                   src={`https://www.youtube.com/embed/${video.youtubeid}?rel=0`}
-                  frameborder="0"
-                  allowfullscreen
+                  frameBorder="0"
+                  allowFullScreen
                 />
               </div>
             ))}

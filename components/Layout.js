@@ -231,7 +231,9 @@ const Menu = () => (
       <a href="/#monitores">Monitores</a>
     </li>
     <li>
-      <Link href={{ pathname: '/multimedia' }}>Multimedia</Link>
+      <a href="/multimedia">
+        Multimedia
+      </a>
     </li>
     <style jsx>{`
       .menu {
